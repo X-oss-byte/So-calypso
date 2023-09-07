@@ -336,6 +336,7 @@ export interface Domain {
 	bundled_plan_subscription_id?: any;
 	product_slug?: any;
 	owner: string;
+	available_promos?: string[];
 }
 
 export interface SiteSettings {
