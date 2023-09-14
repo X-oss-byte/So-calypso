@@ -1,3 +1,4 @@
+import { recordTracksEvent } from '@automattic/calypso-analytics';
 import { Button, Card, Spinner } from '@automattic/components';
 import { localizeUrl } from '@automattic/i18n-utils';
 import { ToggleControl } from '@wordpress/components';
@@ -100,6 +101,10 @@ const TransferPage = ( props: TransferPageProps ) => {
 				{}
 			);
 			setShowUpsellDiscount( true );
+			recordTracksEvent( 'calypso_show_discount_on_domain_transfer_out', {
+				domain: selectedDomainName,
+				source: 'domain_get_auth_code',
+			} );
 		} catch {
 			// Nothing needs to be done here. If the request fails, the user will not see the upsell banner.
 		}
@@ -222,6 +227,13 @@ const TransferPage = ( props: TransferPageProps ) => {
 		setIsLockingOrUnlockingDomain( true );
 		const lock = ! isDomainLocked;
 		setShowUpsellDiscount( ! lock );
+
+		if ( showUpsellDiscount ) {
+			recordTracksEvent( 'calypso_show_discount_on_domain_transfer_out', {
+				domain: selectedDomainName,
+				source: 'domain_unlocked',
+			} );
+		}
 
 		try {
 			await wpcom.req.post( `/domains/${ selectedDomainName }/transfer/`, {
