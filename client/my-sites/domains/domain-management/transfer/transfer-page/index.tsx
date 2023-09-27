@@ -91,8 +91,7 @@ const TransferPage = ( props: TransferPageProps ) => {
 	const [ isLockingOrUnlockingDomain, setIsLockingOrUnlockingDomain ] = useState( false );
 	const [ showUpsellDiscount, setShowUpsellDiscount ] = useState( false );
 	const domain = getSelectedDomain( props );
-	const canUsePreventTransferPromo =
-		domain?.availablePromos?.length && domain?.availablePromos?.length > 0;
+	const canUsePreventTransferPromo = domain?.availablePromos?.length > 0;
 
 	const updateLastTransferOutIntent = async () => {
 		try {
@@ -101,7 +100,7 @@ const TransferPage = ( props: TransferPageProps ) => {
 				{}
 			);
 			setShowUpsellDiscount( true );
-			recordTracksEvent( 'calypso_show_discount_on_domain_transfer_out', {
+			recordTracksEvent( 'calypso_show_discount_on_domain_transfer_out_intent', {
 				domain: selectedDomainName,
 				source: 'domain_get_auth_code',
 			} );
@@ -229,7 +228,7 @@ const TransferPage = ( props: TransferPageProps ) => {
 		setShowUpsellDiscount( ! lock );
 
 		if ( showUpsellDiscount ) {
-			recordTracksEvent( 'calypso_show_discount_on_domain_transfer_out', {
+			recordTracksEvent( 'calypso_show_discount_on_domain_transfer_out_intent', {
 				domain: selectedDomainName,
 				source: 'domain_unlocked',
 			} );
@@ -368,7 +367,7 @@ const TransferPage = ( props: TransferPageProps ) => {
 						purchase={ purchase }
 						selectedSite={ selectedSite }
 						subscriptionId={ parseInt( domain?.subscriptionId ?? '', 10 ) }
-						tracksProps={ { source: 'test-registered-domain-transfer-out' } }
+						tracksProps={ { source: 'prevent-transfer-out-upsell' } }
 						customLabel={ __( 'Renew now' ) }
 						disabled={ isLoadingPurchase }
 					/>
