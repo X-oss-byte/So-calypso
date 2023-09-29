@@ -1,3 +1,4 @@
+import { createSelector } from '@automattic/state-utils';
 import { useSelector } from 'react-redux';
 import isPlanAvailableForPurchase from 'calypso/state/sites/plans/selectors/is-plan-available-for-purchase';
 import { getSelectedSiteId } from 'calypso/state/ui/selectors';
@@ -11,9 +12,10 @@ type PlanUpgradeability = {
 	[ planSlug in PlanSlug ]: boolean;
 };
 
-const usePlanUpgradeabilityCheck = ( { planSlugs }: Props ): PlanUpgradeability => {
-	const selectedSiteId = useSelector( getSelectedSiteId );
-	const planUpgradeability = useSelector( ( state ) => {
+const getPlanUpgradeability = createSelector(
+	( state, planSlugs: PlanSlug[] ) => {
+		const selectedSiteId = getSelectedSiteId( state );
+
 		return planSlugs.reduce( ( acc, planSlug ) => {
 			return {
 				...acc,
@@ -21,9 +23,12 @@ const usePlanUpgradeabilityCheck = ( { planSlugs }: Props ): PlanUpgradeability 
 					!! selectedSiteId && isPlanAvailableForPurchase( state, selectedSiteId, planSlug ),
 			};
 		}, {} as PlanUpgradeability );
-	} );
+	},
+	[ getSelectedSiteId, ( state, planSlugs: PlanSlug[] ) => planSlugs ]
+);
 
-	return planUpgradeability;
+const usePlanUpgradeabilityCheck = ( { planSlugs }: Props ): PlanUpgradeability => {
+	return useSelector( ( state ) => getPlanUpgradeability( state, planSlugs ) );
 };
 
 export default usePlanUpgradeabilityCheck;

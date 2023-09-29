@@ -5,6 +5,7 @@ import {
 	planLevelsMatch,
 	type PlanSlug,
 } from '@automattic/calypso-products';
+import { useMemo } from '@wordpress/element';
 import { useTranslate } from 'i18n-calypso';
 import { isPopularPlan } from './is-popular-plan';
 import type { PlansIntent } from './use-grid-plans';
@@ -30,42 +31,46 @@ const useHighlightLabels = ( {
 }: Props ) => {
 	const translate = useTranslate();
 
-	return planSlugs.reduce(
-		( acc, planSlug ) => {
-			const isCurrentPlan = currentSitePlanSlug === planSlug;
-			const isPlanAvailableForUpgrade = planUpgradeability?.[ planSlug ];
-			const isSuggestedPlan =
-				selectedPlan && planLevelsMatch( planSlug, selectedPlan ) && isPlanAvailableForUpgrade;
+	return useMemo(
+		() =>
+			planSlugs.reduce(
+				( acc, planSlug ) => {
+					const isCurrentPlan = currentSitePlanSlug === planSlug;
+					const isPlanAvailableForUpgrade = planUpgradeability?.[ planSlug ];
+					const isSuggestedPlan =
+						selectedPlan && planLevelsMatch( planSlug, selectedPlan ) && isPlanAvailableForUpgrade;
 
-			let label;
-			if ( isCurrentPlan ) {
-				label = translate( 'Your plan' );
-			} else if ( isSuggestedPlan ) {
-				label = translate( 'Suggested' );
-			} else if ( 'plans-newsletter' === intent ) {
-				if ( isPersonalPlan( planSlug ) ) {
-					label = translate( 'Best for Newsletter' );
-				}
-			} else if ( 'plans-link-in-bio' === intent ) {
-				if ( isPremiumPlan( planSlug ) ) {
-					label = translate( 'Best for Link in Bio' );
-				}
-			} else if ( 'plans-blog-onboarding' === intent ) {
-				if ( isPremiumPlan( planSlug ) ) {
-					label = translate( 'Best for Blog' );
-				}
-			} else if ( isBusinessPlan( planSlug ) && ! selectedPlan ) {
-				label = translate( 'Best for devs' );
-			} else if ( isPopularPlan( planSlug ) && ! selectedPlan ) {
-				label = translate( 'Popular' );
-			}
+					let label;
+					if ( isCurrentPlan ) {
+						label = translate( 'Your plan' );
+					} else if ( isSuggestedPlan ) {
+						label = translate( 'Suggested' );
+					} else if ( 'plans-newsletter' === intent ) {
+						if ( isPersonalPlan( planSlug ) ) {
+							label = translate( 'Best for Newsletter' );
+						}
+					} else if ( 'plans-link-in-bio' === intent ) {
+						if ( isPremiumPlan( planSlug ) ) {
+							label = translate( 'Best for Link in Bio' );
+						}
+					} else if ( 'plans-blog-onboarding' === intent ) {
+						if ( isPremiumPlan( planSlug ) ) {
+							label = translate( 'Best for Blog' );
+						}
+					} else if ( isBusinessPlan( planSlug ) && ! selectedPlan ) {
+						label = translate( 'Best for devs' );
+					} else if ( isPopularPlan( planSlug ) && ! selectedPlan ) {
+						label = translate( 'Popular' );
+					}
 
-			return {
-				...acc,
-				[ planSlug ]: label ?? null,
-			};
-		},
-		{} as Record< PlanSlug, TranslateResult | null >
+					return {
+						...acc,
+						[ planSlug ]: label ?? null,
+					};
+				},
+				{} as Record< PlanSlug, TranslateResult | null >
+			),
+		[ planSlugs, currentSitePlanSlug, planUpgradeability, selectedPlan, intent, translate ]
 	);
 };
 
