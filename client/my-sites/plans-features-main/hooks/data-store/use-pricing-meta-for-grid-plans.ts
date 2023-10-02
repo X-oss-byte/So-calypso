@@ -181,27 +181,13 @@ const getGridPlanPrices = createSelector(
 			}
 		);
 	},
-	[
-		( state: IAppState, planSlugs: PlanSlug[] ) => planSlugs,
-		(
-			state: IAppState,
-			planSlugs: PlanSlug[],
-			selectedStorageOptions: SelectedStorageOptionForPlans | undefined
-		) => selectedStorageOptions,
-		(
-			state: IAppState,
-			planSlugs: PlanSlug[],
-			selectedStorageOptions: SelectedStorageOptionForPlans | undefined,
-			storageAddOns: ( AddOnMeta | null )[] | null | undefined
-		) => storageAddOns,
-		(
-			state: IAppState,
-			planSlugs: PlanSlug[],
-			selectedStorageOptions: SelectedStorageOptionForPlans | undefined,
-			storageAddOns: ( AddOnMeta | null )[] | null | undefined,
-			withoutProRatedCredits: boolean | undefined
-		) => withoutProRatedCredits,
-	]
+	(
+		state: IAppState,
+		planSlugs: PlanSlug[],
+		selectedStorageOptions: SelectedStorageOptionForPlans | undefined,
+		storageAddOns: ( AddOnMeta | null )[] | null | undefined,
+		withoutProRatedCredits: boolean | undefined
+	) => [ planSlugs, selectedStorageOptions, storageAddOns, withoutProRatedCredits ]
 );
 
 /**

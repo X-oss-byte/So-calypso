@@ -42,10 +42,7 @@ const getPricedAPIPlans = createSelector(
 			},
 			{} as { [ planSlug: string ]: PricedAPIPlan | null | undefined }
 		),
-	[
-		( state, planSlugs: PlanSlug[] ) => planSlugs,
-		( state, planSlugs: PlanSlug[], productIds ) => productIds,
-	]
+	( state, planSlugs: PlanSlug[], productIds ) => [ planSlugs, productIds ]
 );
 
 /*
