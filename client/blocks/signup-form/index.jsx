@@ -870,14 +870,13 @@ class SignupForm extends Component {
 		return <p className="signup-form__terms-of-service-link">{ tosText }</p>;
 	};
 
-	getNotice() {
+	getNotice( isSocialFirst = false ) {
 		const userExistsError = this.getUserExistsError( this.props );
 
 		if ( userExistsError ) {
 			const loginLink = this.getLoginLink( { emailAddress: userExistsError.email } );
 			return this.globalNotice(
 				{
-					info: true,
 					message: this.props.translate(
 						'We found a WordPress.com account with the email address "%(email)s". ' +
 							'{{a}}Log in to this account{{/a}} to connect it to your profile, ' +
@@ -908,7 +907,7 @@ class SignupForm extends Component {
 						}
 					),
 				},
-				'is-info'
+				isSocialFirst ? 'is-transparent-info' : 'is-info'
 			);
 		}
 
@@ -1183,7 +1182,7 @@ class SignupForm extends Component {
 					isReskinned={ this.props.isReskinned }
 					redirectToAfterLoginUrl={ this.props.redirectToAfterLoginUrl }
 					queryArgs={ this.props.queryArgs }
-					notice={ this.getNotice() }
+					notice={ this.getNotice( true ) }
 				/>
 			);
 		}
