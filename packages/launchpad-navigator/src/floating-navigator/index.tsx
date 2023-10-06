@@ -10,7 +10,7 @@ export type FloatingNavigatorProps = {
 const FloatingNavigator = ( { siteSlug }: FloatingNavigatorProps ) => {
 	return (
 		<Card className="launchpad-navigator__floating-navigator">
-			<Launchpad siteSlug={ siteSlug } checklistSlug="intent-build" />
+			<Launchpad context="launchpad-navigator" siteSlug={ siteSlug } checklistSlug="intent-build" />
 		</Card>
 	);
 };

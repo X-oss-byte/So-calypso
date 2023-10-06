@@ -30,6 +30,7 @@ export interface Task {
 	repetition_count?: number;
 	order?: number;
 	body?: TaskBody[];
+	body_context?: Array< string >;
 }
 
 export type LaunchpadChecklist = Task[];
