@@ -30,7 +30,6 @@ type PlanFeaturesActionsButtonProps = {
 	canUserManageCurrentPlan?: boolean | null;
 	className: string;
 	currentSitePlanSlug?: string | null;
-	trialPlan?: boolean;
 	freePlan: boolean;
 	currentPlanManageHref?: string;
 	isPopular?: boolean;
@@ -62,7 +61,6 @@ const DummyDisabledButton = styled.div`
 `;
 
 const SignupFlowPlanFeatureActionButton = ( {
-	trialPlan,
 	freePlan,
 	planTitle,
 	classes,
@@ -72,7 +70,6 @@ const SignupFlowPlanFeatureActionButton = ( {
 	handleUpgradeButtonClick,
 	busy,
 }: {
-	trialPlan: boolean;
 	freePlan: boolean;
 	planTitle: TranslateResult;
 	classes: string;
@@ -85,9 +82,7 @@ const SignupFlowPlanFeatureActionButton = ( {
 	const translate = useTranslate();
 	let btnText;
 
-	if ( trialPlan ) {
-		btnText = translate( 'Start trial' );
-	} else if ( freePlan ) {
+	if ( freePlan ) {
 		btnText = translate( 'Start with Free' );
 	} else if ( isStuck && ! isLargeCurrency ) {
 		btnText = translate( 'Get %(plan)s – %(priceString)s', {
@@ -368,7 +363,6 @@ const PlanFeaturesActionsButton: React.FC< PlanFeaturesActionsButtonProps > = ( 
 	className,
 	currentSitePlanSlug,
 	freePlan = false,
-	trialPlan = false,
 	currentPlanManageHref,
 	isInSignup,
 	isLaunchPage,
@@ -479,7 +473,6 @@ const PlanFeaturesActionsButton: React.FC< PlanFeaturesActionsButtonProps > = ( 
 		return (
 			<SignupFlowPlanFeatureActionButton
 				freePlan={ freePlan }
-				trialPlan={ trialPlan }
 				planTitle={ planTitle }
 				classes={ classes }
 				priceString={ priceString }

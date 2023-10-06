@@ -440,7 +440,6 @@ import {
 	PRODUCT_JETPACK_BACKUP_T1_BI_YEARLY,
 	FEATURE_JETPACK_SOCIAL_ADVANCED_BI_YEARLY,
 	FEATURE_AI_ASSISTED_PRODUCT_DESCRIPTION,
-	TYPE_HOSTING_TRIAL,
 } from './constants';
 import type {
 	BillingTerm,
@@ -3624,7 +3623,7 @@ if ( isEnabled( 'plans/migration-trial' ) ) {
 PLANS_LIST[ PLAN_HOSTING_TRIAL_MONTHLY ] = {
 	...getPlanBusinessDetails(),
 	getPlanTagline: () => i18n.translate( 'Try all the features of our Business plan.' ),
-	type: TYPE_HOSTING_TRIAL,
+	type: TYPE_BUSINESS,
 	group: GROUP_WPCOM,
 	getProductId: () => 1058,
 	getPathSlug: () => PLAN_HOSTING_TRIAL_MONTHLY,
