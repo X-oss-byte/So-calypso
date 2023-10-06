@@ -1,11 +1,11 @@
 import { useTranslate } from 'i18n-calypso';
 import CalypsoShoppingCartProvider from '../checkout/calypso-shopping-cart-provider';
+import { useGetFreeTrialSlugForPlan } from '../plans/hooks/use-get-free-trial-slug-for-plan';
 import ComparisonGrid from './components/comparison-grid';
 import FeaturesGrid from './components/features-grid';
 import PlansGridContextProvider from './grid-context';
 import useIsLargeCurrency from './hooks/npm-ready/use-is-large-currency';
 import useUpgradeClickHandler from './hooks/npm-ready/use-upgrade-click-handler';
-import { useGetFreeTrialSlugForPlan } from './hooks/use-get-free-trial-slug-for-plan';
 import { useIsPlanUpgradeCreditVisible } from './hooks/use-is-plan-upgrade-credit-visible';
 import { usePlanPricingInfoFromGridPlans } from './hooks/use-plan-pricing-info-from-grid-plans';
 import type {
@@ -15,7 +15,7 @@ import type {
 } from './hooks/npm-ready/data-store/use-grid-plans';
 import type { DataResponse, PlanActionOverrides } from './types';
 import type { PlanTypeSelectorProps } from '../plans-features-main/components/plan-type-selector';
-import type { FeatureList, WPComStorageAddOnSlug } from '@automattic/calypso-products';
+import type { FeatureList, PlanSlug, WPComStorageAddOnSlug } from '@automattic/calypso-products';
 import type { DomainSuggestion } from '@automattic/data-stores';
 import type { MinimalRequestCartProduct } from '@automattic/shopping-cart';
 import './style.scss';
@@ -69,6 +69,7 @@ export interface PlansGridProps {
 	isHidden?: boolean;
 	currentPlanManageHref?: string;
 	canUserManageCurrentPlan?: boolean | null;
+	getFreeTrialSlugForPlan?( planSlug: PlanSlug ): PlanSlug | undefined;
 }
 
 const WrappedComparisonGrid = ( {
@@ -98,6 +99,10 @@ const WrappedComparisonGrid = ( {
 		onUpgradeClick,
 	} );
 
+	const getFreeTrialSlugForPlan = useGetFreeTrialSlugForPlan( {
+		flowName: flowName ?? null,
+	} );
+
 	if ( isInSignup ) {
 		return (
 			<PlansGridContextProvider
@@ -123,6 +128,7 @@ const WrappedComparisonGrid = ( {
 					showLegacyStorageFeature={ showLegacyStorageFeature }
 					showUpgradeableStorage={ showUpgradeableStorage }
 					onStorageAddOnClick={ onStorageAddOnClick }
+					getFreeTrialSlugForPlan={ getFreeTrialSlugForPlan }
 				/>
 			</PlansGridContextProvider>
 		);
