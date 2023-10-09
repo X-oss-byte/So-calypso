@@ -1,10 +1,14 @@
+import { Card } from '@automattic/components';
 import { useTranslate } from 'i18n-calypso';
+import { useEffect } from 'react';
 import SubscriptionsModuleBanner from 'calypso/blocks/subscriptions-module-banner';
 import DocumentHead from 'calypso/components/data/document-head';
 import QueryJetpackModules from 'calypso/components/data/query-jetpack-modules';
 import FormattedHeader from 'calypso/components/formatted-header';
 import Main from 'calypso/components/main';
 import { useNewsletterCategoriesBlogSticker } from 'calypso/data/newsletter-categories';
+import scrollToAnchor from 'calypso/lib/scroll-to-anchor';
+import SettingsSectionHeader from 'calypso/my-sites/site-settings/settings-section-header';
 import { useSelector } from 'calypso/state';
 import isJetpackModuleActive from 'calypso/state/selectors/is-jetpack-module-active';
 import isAtomicSiteSelector from 'calypso/state/selectors/is-site-automated-transfer';
@@ -15,7 +19,11 @@ import {
 import { getSelectedSiteId } from 'calypso/state/ui/selectors';
 import wrapSettingsForm from '../wrap-settings-form';
 import { NewsletterCategoriesSection } from './newsletter-categories-section';
-import { NewsletterSettingsSection } from './newsletter-section';
+// import { NewsletterSettingsSection } from './newsletter-section';
+import { EmailsTextSetting } from './newsletter-section/EmailsTextSetting';
+import { ExcerptSetting } from './newsletter-section/ExcerptSetting';
+import { FeaturedImageEmailSetting } from './newsletter-section/FeaturedImageEmailSetting';
+import { SubscribeModalSetting } from './newsletter-section/SubscribeModalSetting';
 
 const defaultNewsletterCategoryIds: number[] = [];
 
@@ -76,6 +84,7 @@ const NewsletterSettingsForm = wrapSettingsForm( getFormSettings )( ( {
 	settings,
 	updateFields,
 }: NewsletterSettingsFormProps ) => {
+	const translate = useTranslate();
 	const siteId = useSelector( getSelectedSiteId );
 	const isSimpleSite = useSelector( isSimpleSiteSelector );
 	const isAtomicSite = useSelector( ( state ) => {
@@ -85,6 +94,14 @@ const NewsletterSettingsForm = wrapSettingsForm( getFormSettings )( ( {
 
 		return isAtomicSiteSelector( state, siteId );
 	} );
+
+	const {
+		wpcom_featured_image_in_email,
+		wpcom_subscription_emails_use_excerpt,
+		subscription_options,
+		sm_enabled,
+	} = fields;
+
 	const hasNewsletterCategoriesBlogSticker = useNewsletterCategoriesBlogSticker( { siteId } );
 
 	const isSubscriptionModuleInactive = useSelector( ( state ) => {
@@ -104,9 +121,72 @@ const NewsletterSettingsForm = wrapSettingsForm( getFormSettings )( ( {
 	const disabled = isSubscriptionModuleInactive || isRequestingSettings || isSavingSettings;
 	const savedSubscriptionOptions = settings?.subscription_options;
 
+	// Update subscription_options form fields when savedSubscriptionOptions changes.
+	// This makes sure the form fields hold the current value after saving.
+	useEffect( () => {
+		updateFields( { subscription_options: savedSubscriptionOptions } );
+
+		// If the URL has a hash, scroll to it.
+		scrollToAnchor( { offset: 15 } );
+	}, [ savedSubscriptionOptions, updateFields ] );
+
 	return (
 		<>
 			{ siteId && <QueryJetpackModules siteId={ siteId } /> }
+			{ /*
+			<form onSubmit={ handleSubmitForm }>
+				<NewsletterSettingsSection
+					fields={ fields }
+					handleToggle={ handleToggle }
+					handleSubmitForm={ handleSubmitForm }
+					disabled={ disabled }
+					isSavingSettings={ isSavingSettings }
+					savedSubscriptionOptions={ savedSubscriptionOptions }
+					updateFields={ updateFields }
+				/>
+			</form>
+			*/ }
+			{ /* @ts-expect-error SettingsSectionHeader is not typed and is causing errors */ }
+			<SettingsSectionHeader
+				id="subscriptions"
+				title={ translate( 'Subscriptions' ) }
+				showButton
+				onButtonClick={ handleSubmitForm }
+				disabled={ disabled }
+				isSaving={ isSavingSettings }
+			/>
+			<Card className="site-settings__card">
+				<SubscribeModalSetting
+					value={ sm_enabled }
+					handleToggle={ handleToggle }
+					disabled={ disabled }
+				/>
+			</Card>
+
+			{ /* @ts-expect-error SettingsSectionHeader is not typed and is causing errors */ }
+			<SettingsSectionHeader
+				id="email-settings"
+				title={ translate( 'Email' ) }
+				showButton
+				onButtonClick={ handleSubmitForm }
+				disabled={ disabled }
+				isSaving={ isSavingSettings }
+			/>
+			<Card className="site-settings__card">
+				<FeaturedImageEmailSetting
+					value={ wpcom_featured_image_in_email }
+					handleToggle={ handleToggle }
+					disabled={ disabled }
+				/>
+			</Card>
+			<Card className="site-settings__card">
+				<ExcerptSetting
+					value={ wpcom_subscription_emails_use_excerpt }
+					updateFields={ updateFields }
+					disabled={ disabled }
+				/>
+			</Card>
+
 			{ ( isSimpleSite || isAtomicSite || hasNewsletterCategoriesBlogSticker ) && (
 				<form onSubmit={ handleSubmitForm }>
 					<NewsletterCategoriesSection
@@ -122,17 +202,23 @@ const NewsletterSettingsForm = wrapSettingsForm( getFormSettings )( ( {
 					/>
 				</form>
 			) }
-			<form onSubmit={ handleSubmitForm }>
-				<NewsletterSettingsSection
-					fields={ fields }
-					handleToggle={ handleToggle }
-					handleSubmitForm={ handleSubmitForm }
-					disabled={ disabled }
-					isSavingSettings={ isSavingSettings }
-					savedSubscriptionOptions={ savedSubscriptionOptions }
+
+			{ /* @ts-expect-error SettingsSectionHeader is not typed and is causing errors */ }
+			<SettingsSectionHeader
+				id="messages"
+				title={ translate( 'Messages' ) }
+				showButton
+				onButtonClick={ handleSubmitForm }
+				disabled={ disabled }
+				isSaving={ isSavingSettings }
+			/>
+			<Card className="site-settings__card">
+				<EmailsTextSetting
+					value={ subscription_options }
 					updateFields={ updateFields }
+					disabled={ disabled }
 				/>
-			</form>
+			</Card>
 		</>
 	);
 } );
