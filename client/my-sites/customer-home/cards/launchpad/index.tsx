@@ -32,7 +32,6 @@ const CustomerHomeLaunchpad = ( {
 	const launchpadContext = 'customer-home';
 	const siteId = useSelector( getSelectedSiteId );
 	const siteSlug = useSelector( ( state: AppState ) => getSiteSlug( state, siteId ) );
-	const { siteLaunched } = extraActions || {};
 
 	const translate = useTranslate();
 	const [ isDismissed, setIsDismissed ] = useState( false );
@@ -114,7 +113,7 @@ const CustomerHomeLaunchpad = ( {
 				siteSlug={ siteSlug }
 				checklistSlug={ checklistSlug }
 				launchpadContext={ launchpadContext }
-				siteLaunched={ siteLaunched }
+				extraActions={ extraActions }
 			/>
 		</div>
 	);
