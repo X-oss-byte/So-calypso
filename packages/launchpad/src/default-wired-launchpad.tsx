@@ -1,7 +1,8 @@
 import { recordTracksEvent } from '@automattic/calypso-analytics';
-import { LaunchpadNavigator, useLaunchpad } from '@automattic/data-stores';
-import { useDispatch } from '@wordpress/data';
-import { useEffect } from 'react';
+import { LaunchpadNavigator, useLaunchpad, Site, type SiteSelect } from '@automattic/data-stores';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { useEffect, useState } from 'react';
+import { ShareSiteModal } from './action-components';
 import Launchpad from './launchpad';
 import { setUpActionsForTasks } from './setup-actions';
 import type { Task } from './types';
@@ -11,6 +12,7 @@ type DefaultWiredLaunchpadProps = {
 	checklistSlug: string;
 	launchpadContext: string;
 };
+export const SITE_STORE = Site.register( { client_id: '', client_secret: '' } );
 
 const DefaultWiredLaunchpad = ( {
 	siteSlug,
@@ -29,6 +31,14 @@ const DefaultWiredLaunchpad = ( {
 
 	const numberOfSteps = checklist?.length || 0;
 	const completedSteps = ( checklist?.filter( ( task: Task ) => task.completed ) || [] ).length;
+
+	const [ shareSiteModalIsOpen, setShareSiteModalIsOpen ] = useState( false );
+	const site = useSelect(
+		( select ) => {
+			return siteSlug && ( select( SITE_STORE ) as SiteSelect ).getSite( siteSlug );
+		},
+		[ siteSlug ]
+	);
 
 	useEffect( () => {
 		// Record task list view as a whole.
@@ -67,12 +77,18 @@ const DefaultWiredLaunchpad = ( {
 			tracksData,
 			extraActions: {
 				setActiveChecklist,
+				setShareSiteModalIsOpen,
 			},
 		} );
 	};
 
 	return (
-		<Launchpad siteSlug={ siteSlug } checklistSlug={ checklistSlug } taskFilter={ taskFilter } />
+		<>
+			{ shareSiteModalIsOpen && site && (
+				<ShareSiteModal setModalIsOpen={ setShareSiteModalIsOpen } site={ site } />
+			) }
+			<Launchpad siteSlug={ siteSlug } checklistSlug={ checklistSlug } taskFilter={ taskFilter } />
+		</>
 	);
 };
 
