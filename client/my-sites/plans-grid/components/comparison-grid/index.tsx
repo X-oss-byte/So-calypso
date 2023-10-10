@@ -353,7 +353,6 @@ type ComparisonGridHeaderCellProps = ComparisonGridHeaderProps & {
 	isLargeCurrency: boolean;
 	isPlanUpgradeCreditEligible: boolean;
 	planSlug: PlanSlug;
-	freeTrialPlanSlug?: PlanSlug;
 };
 
 type PlanFeatureFootnotes = {
@@ -363,7 +362,6 @@ type PlanFeatureFootnotes = {
 
 const ComparisonGridHeaderCell = ( {
 	planSlug,
-	freeTrialPlanSlug,
 	allVisible,
 	isLastInRow,
 	isFooter,
@@ -466,7 +464,6 @@ const ComparisonGridHeaderCell = ( {
 				isLaunchPage={ isLaunchPage }
 				planSlug={ planSlug }
 				flowName={ flowName }
-				freeTrialPlanSlug={ freeTrialPlanSlug }
 				onUpgradeClick={ ( overridePlanSlug ) => onUpgradeClick( overridePlanSlug ?? planSlug ) }
 				planActionOverrides={ planActionOverrides }
 				showMonthlyPrice={ false }
@@ -511,10 +508,9 @@ const ComparisonGridHeader = ( {
 				key="feature-name"
 				className="plan-comparison-grid__header-cell plan-comparison-grid__interval-toggle is-placeholder-header-cell"
 			/>
-			{ visibleGridPlans.map( ( { planSlug, freeTrialPlanSlug }, index ) => (
+			{ visibleGridPlans.map( ( { planSlug }, index ) => (
 				<ComparisonGridHeaderCell
 					planSlug={ planSlug }
-					freeTrialPlanSlug={ freeTrialPlanSlug }
 					isPlanUpgradeCreditEligible={ isPlanUpgradeCreditEligible }
 					key={ planSlug }
 					isLastInRow={ index === visibleGridPlans.length - 1 }

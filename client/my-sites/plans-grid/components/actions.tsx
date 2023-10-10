@@ -38,7 +38,6 @@ type PlanFeaturesActionsButtonProps = {
 	isLaunchPage?: boolean | null;
 	onUpgradeClick: ( overridePlanSlug?: PlanSlug ) => void;
 	planSlug: PlanSlug;
-	freeTrialPlanSlug?: PlanSlug;
 	flowName?: string | null;
 	buttonText?: string;
 	isWpcomEnterpriseGridPlan: boolean;
@@ -386,7 +385,6 @@ const PlanFeaturesActionsButton: React.FC< PlanFeaturesActionsButtonProps > = ( 
 	isLaunchPage,
 	onUpgradeClick,
 	planSlug,
-	freeTrialPlanSlug,
 	flowName,
 	buttonText,
 	isWpcomEnterpriseGridPlan = false,
@@ -402,6 +400,7 @@ const PlanFeaturesActionsButton: React.FC< PlanFeaturesActionsButtonProps > = ( 
 		planTitle,
 		current,
 		pricing: { currencyCode, originalPrice, discountedPrice },
+		freeTrialPlanSlug,
 	} = gridPlansIndex[ planSlug ];
 
 	const classes = classNames( 'plan-features-2023-grid__actions-button', className, {
