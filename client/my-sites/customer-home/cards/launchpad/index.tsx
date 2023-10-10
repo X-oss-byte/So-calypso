@@ -20,12 +20,19 @@ import './style.scss';
 
 interface CustomerHomeLaunchpadProps {
 	checklistSlug: string;
+	extraActions?: {
+		siteLaunched?: () => void;
+	};
 }
 
-const CustomerHomeLaunchpad = ( { checklistSlug }: CustomerHomeLaunchpadProps ): JSX.Element => {
+const CustomerHomeLaunchpad = ( {
+	checklistSlug,
+	extraActions,
+}: CustomerHomeLaunchpadProps ): JSX.Element => {
 	const launchpadContext = 'customer-home';
 	const siteId = useSelector( getSelectedSiteId );
 	const siteSlug = useSelector( ( state: AppState ) => getSiteSlug( state, siteId ) );
+	const { siteLaunched } = extraActions || {};
 
 	const translate = useTranslate();
 	const [ isDismissed, setIsDismissed ] = useState( false );
@@ -107,6 +114,7 @@ const CustomerHomeLaunchpad = ( { checklistSlug }: CustomerHomeLaunchpadProps ):
 				siteSlug={ siteSlug }
 				checklistSlug={ checklistSlug }
 				launchpadContext={ launchpadContext }
+				siteLaunched={ siteLaunched }
 			/>
 		</div>
 	);

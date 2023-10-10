@@ -17,6 +17,7 @@ type DefaultWiredLaunchpadProps = {
 	siteSlug: string | null;
 	checklistSlug: string;
 	launchpadContext: string;
+	siteLaunched?: () => void;
 };
 export const SITE_STORE = Site.register( { client_id: '', client_secret: '' } );
 
@@ -24,6 +25,7 @@ const DefaultWiredLaunchpad = ( {
 	siteSlug,
 	checklistSlug,
 	launchpadContext,
+	siteLaunched,
 }: DefaultWiredLaunchpadProps ) => {
 	const {
 		data: { checklist },
@@ -84,6 +86,7 @@ const DefaultWiredLaunchpad = ( {
 			extraActions: {
 				setActiveChecklist,
 				setShareSiteModalIsOpen,
+				siteLaunched,
 			},
 		} );
 	};
