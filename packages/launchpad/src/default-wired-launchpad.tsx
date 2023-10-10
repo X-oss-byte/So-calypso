@@ -1,5 +1,11 @@
 import { recordTracksEvent } from '@automattic/calypso-analytics';
-import { LaunchpadNavigator, useLaunchpad, Site, type SiteSelect } from '@automattic/data-stores';
+import {
+	LaunchpadNavigator,
+	useLaunchpad,
+	Site,
+	type SiteSelect,
+	sortLaunchpadTasksByCompletionStatus,
+} from '@automattic/data-stores';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useState } from 'react';
 import { ShareSiteModal } from './action-components';
@@ -87,7 +93,12 @@ const DefaultWiredLaunchpad = ( {
 			{ shareSiteModalIsOpen && site && (
 				<ShareSiteModal setModalIsOpen={ setShareSiteModalIsOpen } site={ site } />
 			) }
-			<Launchpad siteSlug={ siteSlug } checklistSlug={ checklistSlug } taskFilter={ taskFilter } />
+			<Launchpad
+				siteSlug={ siteSlug }
+				checklistSlug={ checklistSlug }
+				taskFilter={ taskFilter }
+				useLaunchpadOptions={ { onSuccess: sortLaunchpadTasksByCompletionStatus } }
+			/>
 		</>
 	);
 };
