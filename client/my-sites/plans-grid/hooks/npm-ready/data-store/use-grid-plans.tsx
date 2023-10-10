@@ -80,6 +80,16 @@ export type UsePricingMetaForGridPlans = ( {
 	storageAddOns: ( AddOnMeta | null )[] | null;
 } ) => { [ planSlug: string ]: PricingMetaForGridPlan } | null;
 
+export type UseFreeTrialPlanSlugs = ( {
+	intent,
+	eligibleForFreeHostingTrial,
+}: {
+	intent: PlansIntent;
+	eligibleForFreeHostingTrial: boolean;
+} ) => {
+	[ Type in PlanType ]?: PlanSlug;
+};
+
 // TODO clk: move to types. will consume plan properties
 export type GridPlan = {
 	planSlug: PlanSlug;
@@ -127,6 +137,8 @@ interface Props {
 	// API plans will be ported to data store and be queried from there
 	usePricedAPIPlans: UsePricedAPIPlans;
 	usePricingMetaForGridPlans: UsePricingMetaForGridPlans;
+	useFreeTrialPlanSlugs: UseFreeTrialPlanSlugs;
+	eligibleForFreeHostingTrial: boolean;
 	selectedFeature?: string | null;
 	term?: ( typeof TERMS_LIST )[ number ]; // defaults to monthly
 	intent?: PlansIntent;
@@ -145,11 +157,6 @@ interface Props {
 	 */
 	isSubdomainNotGenerated?: boolean;
 	storageAddOns: ( AddOnMeta | null )[] | null;
-	freeTrialPlanSlugs?: {
-		[ Intent in PlansIntent ]?: {
-			[ Type in PlanType ]?: PlanSlug;
-		};
-	};
 }
 
 const usePlanTypesWithIntent = ( {
@@ -250,17 +257,22 @@ const usePlanTypesWithIntent = ( {
 const useGridPlans = ( {
 	usePricedAPIPlans,
 	usePricingMetaForGridPlans,
+	useFreeTrialPlanSlugs,
 	term = TERM_MONTHLY,
 	intent,
-	freeTrialPlanSlugs,
 	selectedPlan,
 	sitePlanSlug,
 	hideEnterprisePlan,
 	isInSignup,
 	usePlanUpgradeabilityCheck,
+	eligibleForFreeHostingTrial,
 	isSubdomainNotGenerated,
 	storageAddOns,
 }: Props ): Omit< GridPlan, 'features' >[] | null => {
+	const freeTrialPlanSlugs = useFreeTrialPlanSlugs( {
+		intent: intent ?? 'default',
+		eligibleForFreeHostingTrial,
+	} );
 	const availablePlanSlugs = usePlansFromTypes( {
 		planTypes: usePlanTypesWithIntent( {
 			intent: 'default',
@@ -339,7 +351,7 @@ const useGridPlans = ( {
 
 		return {
 			planSlug,
-			freeTrialPlanSlug: freeTrialPlanSlugs?.[ intent ?? 'default' ]?.[ planConstantObj.type ],
+			freeTrialPlanSlug: freeTrialPlanSlugs?.[ planConstantObj.type ],
 			isVisible: planSlugsForIntent.includes( planSlug ),
 			tagline,
 			availableForPurchase,
