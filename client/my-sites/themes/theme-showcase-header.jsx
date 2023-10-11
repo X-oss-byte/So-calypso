@@ -4,6 +4,7 @@ import DocumentHead from 'calypso/components/data/document-head';
 import InlineSupportLink from 'calypso/components/inline-support-link';
 import ScreenOptionsTab from 'calypso/components/screen-options-tab';
 import { isUserLoggedIn } from 'calypso/state/current-user/selectors';
+import { getSelectedSiteId } from 'calypso/state/ui/selectors';
 import InstallThemeButton from './install-theme-button';
 import ThemesHeader from './themes-header';
 import useThemeShowcaseDescription from './use-theme-showcase-description';
@@ -14,6 +15,7 @@ export default function ThemeShowcaseHeader( { canonicalUrl, filter, tier, verti
 	// eslint-disable-next-line no-shadow
 	const translate = useTranslate();
 	const isLoggedIn = useSelector( isUserLoggedIn );
+	const selectedSiteId = useSelector( getSelectedSiteId );
 	const description = useThemeShowcaseDescription( { filter, tier, vertical } );
 	const title = useThemeShowcaseTitle( { filter, tier, vertical } );
 	const loggedOutSeoContent = useThemeShowcaseLoggedOutSeoContent( filter, tier );
@@ -54,7 +56,7 @@ export default function ThemeShowcaseHeader( { canonicalUrl, filter, tier, verti
 		<>
 			<DocumentHead title={ documentHeadTitle } meta={ metas } />
 			<ThemesHeader title={ themesHeaderTitle } description={ themesHeaderDescription }>
-				{ isLoggedIn && (
+				{ isLoggedIn && selectedSiteId && (
 					<>
 						<div className="themes__install-theme-button-container">
 							<InstallThemeButton />

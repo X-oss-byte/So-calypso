@@ -6,7 +6,7 @@
 		--color-surface-backdrop: var(--studio-white);
 	}
 
-	.layout:not(.has-no-sidebar) .layout__content {
+	.layout.is-logged-in .layout__content {
 		padding-top: var(--masterbar-height);
 	}
 	.main > .notice.is-error {
