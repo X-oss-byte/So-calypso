@@ -3,7 +3,7 @@ import { Button } from '@automattic/components';
 import { isSiteAssemblerFlow, isTailoredSignupFlow } from '@automattic/onboarding';
 import { isDesktop, subscribeIsDesktop } from '@automattic/viewport';
 import classNames from 'classnames';
-import i18n, { localize } from 'i18n-calypso';
+import { localize } from 'i18n-calypso';
 import PropTypes from 'prop-types';
 import { parse as parseQs } from 'qs';
 import { Component } from 'react';
@@ -15,9 +15,7 @@ import Notice from 'calypso/components/notice';
 import { getTld, isSubdomain } from 'calypso/lib/domains';
 import { buildUpgradeFunction } from 'calypso/lib/signup/step-actions';
 import wp from 'calypso/lib/wp';
-import PlansComparison, { isEligibleForProPlan } from 'calypso/my-sites/plans-comparison';
 import PlansFeaturesMain from 'calypso/my-sites/plans-features-main';
-import { ExperimentalIntervalTypeToggle } from 'calypso/my-sites/plans-features-main/components/plan-type-selector';
 import StepWrapper from 'calypso/signup/step-wrapper';
 import { getStepUrl } from 'calypso/signup/utils';
 import { recordTracksEvent } from 'calypso/state/analytics/actions';
@@ -109,8 +107,6 @@ export class PlansStep extends Component {
 			selectedSite,
 			intent,
 			flowName,
-			isReskinned,
-			eligibleForProPlan,
 		} = this.props;
 
 		const intervalType = getIntervalType( this.props.path );
@@ -129,28 +125,6 @@ export class PlansStep extends Component {
 			return this.renderLoading();
 		}
 
-		if ( eligibleForProPlan ) {
-			const selectedDomainConnection =
-				this.props.progress?.domains?.domainItem?.product_slug === 'domain_map';
-			return (
-				<div>
-					{ errorDisplay }
-					<ExperimentalIntervalTypeToggle
-						intervalType={ intervalType }
-						isInSignup={ true }
-						plans={ [] }
-						eligibleForWpcomMonthlyPlans={ true }
-					/>
-					<PlansComparison
-						isInSignup={ true }
-						intervalType={ intervalType }
-						onSelectPlan={ ( cartItems ) => this.onSelectPlan( cartItems ) }
-						selectedSiteId={ selectedSite?.ID || undefined }
-						selectedDomainConnection={ selectedDomainConnection }
-					/>
-				</div>
-			);
-		}
 		const { signupDependencies } = this.props;
 		const { siteUrl, domainItem, siteTitle, username } = signupDependencies;
 		const paidDomainName = domainItem?.meta;
@@ -172,7 +146,6 @@ export class PlansStep extends Component {
 					plansWithScroll={ this.state.isDesktop }
 					intent={ intent }
 					flowName={ flowName }
-					isReskinned={ isReskinned }
 					hideFreePlan={ hideFreePlan }
 					hidePersonalPlan={ this.props.hidePersonalPlan }
 					hidePremiumPlan={ this.props.hidePremiumPlan }
@@ -195,16 +168,10 @@ export class PlansStep extends Component {
 	}
 
 	getHeaderText() {
-		const { headerText, translate, eligibleForProPlan, locale } = this.props;
+		const { headerText, translate } = this.props;
 
 		if ( headerText ) {
 			return headerText;
-		}
-
-		if ( eligibleForProPlan ) {
-			return 'en' === locale || i18n.hasTranslation( 'Choose the right plan for you' )
-				? translate( 'Choose the right plan for you' )
-				: translate( 'Choose the plan that’s right for you' );
 		}
 
 		return translate( 'Choose your flavor of WordPress' );
@@ -343,7 +310,6 @@ PlansStep.propTypes = {
 /**
  * Checks if the domainItem picked in the domain step is a top level .blog domain -
  * we only want to make Blogger plan available if it is.
- *
  * @param {Object} domainItem domainItem object stored in the "choose domain" step
  * @returns {boolean} is .blog domain registration
  */
@@ -373,7 +339,6 @@ export default connect(
 		// treatment for the `vertical_plan_listing_v2` experiment is implemented.
 		isInVerticalScrollingPlansExperiment: true,
 		plansLoaded: Boolean( getPlanSlug( state, getPlan( PLAN_FREE )?.getProductId() || 0 ) ),
-		eligibleForProPlan: isEligibleForProPlan( state, getSiteBySlug( state, siteSlug )?.ID ),
 	} ),
 	{ recordTracksEvent, saveSignupStep, submitSignupStep, errorNotice }
 )( localize( PlansStep ) );

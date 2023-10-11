@@ -1,6 +1,6 @@
 import { recordTracksEvent } from '@automattic/calypso-analytics';
 import { isEnabled } from '@automattic/calypso-config';
-import { getPlan, PLAN_BUSINESS, PLAN_WPCOM_PRO } from '@automattic/calypso-products';
+import { getPlan, PLAN_BUSINESS } from '@automattic/calypso-products';
 import { sprintf } from '@wordpress/i18n';
 import { check, plus, Icon } from '@wordpress/icons';
 import { useI18n } from '@wordpress/react-i18n';
@@ -9,7 +9,6 @@ import { useState, useEffect } from 'react';
 import QueryPlans from 'calypso/components/data/query-plans';
 import { getFeatureByKey } from 'calypso/lib/plans/features-list';
 import PlanPrice from 'calypso/my-sites/plan-price';
-import { isEligibleForProPlan } from 'calypso/my-sites/plans-comparison';
 import { useSelector } from 'calypso/state';
 import { getCurrentUserCurrencyCode } from 'calypso/state/currency-code/selectors';
 import { getPlanRawPrice } from 'calypso/state/plans/selectors';
@@ -25,11 +24,8 @@ export const ConfirmUpgradePlan: FunctionComponent< Props > = ( props ) => {
 	const { __ } = useI18n();
 	const initialFeaturesNumber = 6;
 
-	const { sourceSiteSlug, targetSite } = props;
-	const targetSiteEligibleForProPlan = useSelector( ( state ) =>
-		isEligibleForProPlan( state, targetSite?.ID )
-	);
-	const planType = targetSiteEligibleForProPlan ? PLAN_WPCOM_PRO : PLAN_BUSINESS;
+	const { sourceSiteSlug } = props;
+	const planType = PLAN_BUSINESS;
 	const plan = getPlan( planType );
 	const planId = plan?.getProductId();
 	const [ visibleFeaturesNum, setVisibleFeatureNum ] = useState( initialFeaturesNumber );

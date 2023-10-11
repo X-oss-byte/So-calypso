@@ -1,6 +1,5 @@
 import {
 	PLAN_BUSINESS,
-	PLAN_WPCOM_PRO,
 	FEATURE_UPLOAD_THEMES,
 	FEATURE_UPLOAD_PLUGINS,
 	PLAN_ECOMMERCE,
@@ -28,7 +27,6 @@ import InlineSupportLink from 'calypso/components/inline-support-link';
 import Main from 'calypso/components/main';
 import WpAdminAutoLogin from 'calypso/components/wpadmin-auto-login';
 import PageViewTracker from 'calypso/lib/analytics/page-view-tracker';
-import { isEligibleForProPlan } from 'calypso/my-sites/plans-comparison';
 import ActivationModal from 'calypso/my-sites/themes/activation-modal';
 import ThanksModal from 'calypso/my-sites/themes/thanks-modal';
 // Necessary for ThanksModal
@@ -207,7 +205,7 @@ class Upload extends Component {
 	};
 
 	renderUpgradeBanner() {
-		const { siteSlug, isCommerceTrial, eligibleForProPlan, translate } = this.props;
+		const { siteSlug, isCommerceTrial, translate } = this.props;
 		const redirectTo = encodeURIComponent( `/themes/upload/${ siteSlug }` );
 
 		let upsellPlan = PLAN_BUSINESS;
@@ -218,10 +216,6 @@ class Upload extends Component {
 			upsellPlan = PLAN_ECOMMERCE;
 			title = translate( 'Upgrade your plan to access the theme install features' );
 			upgradeUrl = `/plans/${ siteSlug }`;
-		} else if ( eligibleForProPlan ) {
-			upsellPlan = PLAN_WPCOM_PRO;
-			title = translate( 'Upgrade to the Pro plan to access the theme install features' );
-			upgradeUrl = `/checkout/${ siteSlug }/pro?redirect_to=${ redirectTo }`;
 		}
 
 		return (
@@ -389,8 +383,6 @@ const mapStateToProps = ( state ) => {
 	const hasEligibilityMessages = ! (
 		isEmpty( eligibilityHolds ) && isEmpty( eligibilityWarnings )
 	);
-	const eligibleForProPlan = isEligibleForProPlan( state, siteId );
-
 	const canUploadThemesOrPlugins =
 		siteHasFeature( state, siteId, FEATURE_UPLOAD_THEMES ) ||
 		siteHasFeature( state, siteId, FEATURE_UPLOAD_PLUGINS );
@@ -422,7 +414,6 @@ const mapStateToProps = ( state ) => {
 		canUploadThemesOrPlugins,
 		isFetchingPurchases:
 			isFetchingSitePurchases( state ) || ! hasLoadedSitePurchasesFromServer( state ),
-		eligibleForProPlan,
 	};
 };
 
