@@ -257,7 +257,6 @@ private object GutenbergUploadSourceMapsToSentry: BuildType() {
 // to Sentry.
 fun BuildSteps.uploadPluginSourceMaps(
 	slug: String,
-	buildId: String,
 	wpcomURL: String,
 	buildTag: String = "$slug-release-build",
 ): ScriptBuildStep {
