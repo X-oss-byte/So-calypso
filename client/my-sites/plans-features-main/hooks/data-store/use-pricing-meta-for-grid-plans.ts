@@ -187,7 +187,15 @@ const getGridPlanPrices = createSelector(
 		selectedStorageOptions: SelectedStorageOptionForPlans | undefined,
 		storageAddOns: ( AddOnMeta | null )[] | null | undefined,
 		withoutProRatedCredits: boolean | undefined
-	) => [ planSlugs, selectedStorageOptions, storageAddOns, withoutProRatedCredits ]
+	) => [
+		getSelectedSiteId( state ),
+		getCurrentPlan( state, getSelectedSiteId( state ) ),
+		getByPurchaseId( state, getCurrentPlan( state, getSelectedSiteId( state ) )?.id || 0 ),
+		planSlugs,
+		selectedStorageOptions,
+		storageAddOns,
+		withoutProRatedCredits,
+	]
 );
 
 /**
@@ -201,7 +209,7 @@ const usePricingMetaForGridPlans: UsePricingMetaForGridPlans = ( {
 	storageAddOns,
 }: Props ) => {
 	const selectedSiteId = useSelector( getSelectedSiteId ) ?? undefined;
-	const pricedAPIPlans = usePricedAPIPlans( { planSlugs: planSlugs } );
+	const pricedAPIPlans = usePricedAPIPlans( { planSlugs } );
 	const sitePlans = Plans.useSitePlans( { siteId: selectedSiteId } );
 	const selectedStorageOptions = useSelect( ( select ) => {
 		return select( WpcomPlansUI.store ).getSelectedStorageOptions();
@@ -217,7 +225,7 @@ const usePricingMetaForGridPlans: UsePricingMetaForGridPlans = ( {
 		)
 	);
 
-	return useMemo( () => {
+	const pricingMeta = useMemo( () => {
 		/*
 		 * Return null until all data is ready, at least in initial state.
 		 * - For now a simple loader is shown until these are resolved
@@ -249,6 +257,8 @@ const usePricingMetaForGridPlans: UsePricingMetaForGridPlans = ( {
 			{} as { [ planSlug: string ]: PricingMetaForGridPlan }
 		);
 	}, [ planSlugs, pricedAPIPlans, sitePlans, planPrices ] );
+
+	return pricingMeta;
 };
 
 export default usePricingMetaForGridPlans;

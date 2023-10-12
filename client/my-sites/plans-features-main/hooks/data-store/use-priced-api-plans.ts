@@ -2,7 +2,7 @@ import { applyTestFiltersToPlansList } from '@automattic/calypso-products';
 import { createSelector } from '@automattic/state-utils';
 import { useMemo } from '@wordpress/element';
 import { useSelector } from 'react-redux';
-import { getPlan } from 'calypso/state/plans/selectors/plan';
+import { getPlan, getPlans } from 'calypso/state/plans/selectors/plan';
 import type { PlanSlug } from '@automattic/calypso-products';
 import type { PricedAPIPlan } from '@automattic/data-stores';
 import type { UsePricedAPIPlans } from 'calypso/my-sites/plans-grid/hooks/npm-ready/data-store/use-grid-plans';
@@ -42,7 +42,7 @@ const getPricedAPIPlans = createSelector(
 			},
 			{} as { [ planSlug: string ]: PricedAPIPlan | null | undefined }
 		),
-	( state, planSlugs: PlanSlug[], productIds ) => [ planSlugs, productIds ]
+	( state, planSlugs: PlanSlug[], productIds ) => [ getPlans( state ), planSlugs, productIds ]
 );
 
 /*
