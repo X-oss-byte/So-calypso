@@ -13,12 +13,11 @@ import {
 	PLAN_HOSTING_TRIAL_MONTHLY,
 } from '@automattic/calypso-products';
 import { Gridicon, JetpackLogo } from '@automattic/components';
-import { useIsEnglishLocale } from '@automattic/i18n-utils';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useMemo } from '@wordpress/element';
 import classNames from 'classnames';
-import i18n, { useTranslate } from 'i18n-calypso';
+import { useTranslate } from 'i18n-calypso';
 import { useState, useCallback, useEffect, ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useIsPlanUpgradeCreditVisible } from 'calypso/my-sites/plans-grid/hooks/use-is-plan-upgrade-credit-visible';
 import { useManageTooltipToggle } from 'calypso/my-sites/plans-grid/hooks/use-manage-tooltip-toggle';
@@ -736,10 +735,6 @@ const ComparisonGridFeatureGroupRow: React.FunctionComponent< {
 	const featureSlug = feature?.getSlug() ?? '';
 	const footnote = planFeatureFootnotes?.footnotesByFeature?.[ featureSlug ];
 	const tooltipId = `${ feature?.getSlug() }-comparison-grid`;
-	const isEnglishLocale = useIsEnglishLocale();
-	const shouldShowNewJPTooltipCopy =
-		isEnglishLocale ||
-		i18n.hasTranslation( 'Security, performance, and growth tools—powered by Jetpack.' );
 
 	return (
 		<Row
@@ -777,13 +772,9 @@ const ComparisonGridFeatureGroupRow: React.FunctionComponent< {
 								{ allJetpackFeatures.has( feature.getSlug() ) ? (
 									<JetpackIconContainer>
 										<Plans2023Tooltip
-											text={
-												shouldShowNewJPTooltipCopy
-													? translate(
-															'Security, performance, and growth tools—powered by Jetpack.'
-													  )
-													: ''
-											}
+											text={ translate(
+												'Security, performance, and growth tools—powered by Jetpack.'
+											) }
 											setActiveTooltipId={ setActiveTooltipId }
 											activeTooltipId={ activeTooltipId }
 											id={ `jp-${ tooltipId }` }
