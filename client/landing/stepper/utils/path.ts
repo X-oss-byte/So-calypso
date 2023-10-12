@@ -1,3 +1,4 @@
+import { isEnabled } from '@automattic/calypso-config';
 import { Plans } from '@automattic/data-stores';
 import { useLocale } from '@automattic/i18n-utils';
 import languages from '@automattic/languages';
@@ -48,7 +49,7 @@ export const useLoginUrl = ( {
 	variationName,
 	redirectTo,
 	pageTitle,
-	loginPath = `/start/account/user/`,
+	loginPath,
 }: {
 	/**
 	 * Variation name is used to track the relevant login flow in the signup framework as explained in https://github.com/Automattic/wp-calypso/issues/67173
@@ -58,6 +59,9 @@ export const useLoginUrl = ( {
 	pageTitle?: string | null;
 	loginPath?: string;
 } ): string => {
+	if ( ! loginPath ) {
+		loginPath = `/start/account/${ isEnabled( 'signup/social-first' ) ? 'user-social' : 'user' }`;
+	}
 	const locale = useLocale();
 	const localizedLoginPath = locale && locale !== 'en' ? `${ loginPath }${ locale }` : loginPath;
 
