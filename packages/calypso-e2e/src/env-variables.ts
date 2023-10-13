@@ -196,6 +196,9 @@ if (
 	currentEnvVariables.TEST_ON_ATOMIC
 ) {
 	currentEnvVariables.RUN_ID = `Atomic: ${ currentEnvVariables.ATOMIC_VARIATION }`;
+	console.log(
+		`Atomic: ${ currentEnvVariables.ATOMIC_VARIATION }, Run ID: ${ currentEnvVariables.RUN_ID }`
+	);
 }
 
 // @{TODO}: Should we add proxy trap to fallback to process.env values?
