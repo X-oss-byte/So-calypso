@@ -3,6 +3,7 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AllSites from 'calypso/blocks/all-sites';
 import Site from 'calypso/blocks/site';
+import SidebarHeader from 'calypso/layout/sidebar-v2/header';
 import { setLayoutFocus } from 'calypso/state/ui/layout-focus/actions';
 import getSelectedSiteId from 'calypso/state/ui/selectors/get-selected-site-id';
 import JetpackLogo from './jetpack-logo.svg';
@@ -30,7 +31,7 @@ const Header = ( { forceAllSitesView = false }: Props ) => {
 	}, [ dispatch ] );
 
 	return (
-		<div className="jetpack-cloud-sidebar__header">
+		<SidebarHeader className="jetpack-cloud-sidebar__header">
 			{ forceAllSitesView ? (
 				<AllSites
 					showIcon
@@ -46,7 +47,7 @@ const Header = ( { forceAllSitesView = false }: Props ) => {
 					onSelect={ onSelectSite }
 				/>
 			) }
-		</div>
+		</SidebarHeader>
 	);
 };
 
