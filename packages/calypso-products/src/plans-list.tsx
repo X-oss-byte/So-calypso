@@ -442,6 +442,8 @@ import {
 	FEATURE_JETPACK_SOCIAL_ADVANCED_BI_YEARLY,
 	FEATURE_AI_ASSISTED_PRODUCT_DESCRIPTION,
 	TYPE_HOSTING_TRIAL,
+	FEATURE_COMMISSION_FEE_WOO_FEATURES,
+	FEATURE_COMMISSION_FEE_STANDARD_FEATURES,
 } from './constants';
 import type {
 	BillingTerm,
@@ -621,7 +623,10 @@ const getPlanFreeDetails = (): IncompleteWPcomPlan => ( {
 			},
 		];
 	},
-	get2023PlanComparisonConditionalFeatures: () => [ FEATURE_SHARES_SOCIAL_MEDIA_JP ],
+	get2023PlanComparisonConditionalFeatures: () => [
+		FEATURE_SHARES_SOCIAL_MEDIA_JP,
+		FEATURE_COMMISSION_FEE_STANDARD_FEATURES,
+	],
 	getNewsletterSignupFeatures: () => [
 		FEATURE_NEWSLETTER_IMPORT_SUBSCRIBERS_FREE,
 		FEATURE_PREMIUM_CONTENT_JP,
@@ -861,7 +866,10 @@ const getPlanPersonalDetails = (): IncompleteWPcomPlan => ( {
 			},
 		];
 	},
-	get2023PlanComparisonConditionalFeatures: () => [ FEATURE_SHARES_SOCIAL_MEDIA_JP ],
+	get2023PlanComparisonConditionalFeatures: () => [
+		FEATURE_SHARES_SOCIAL_MEDIA_JP,
+		FEATURE_COMMISSION_FEE_STANDARD_FEATURES,
+	],
 	getNewsletterDescription: () =>
 		i18n.translate(
 			'Jumpstart your Newsletter with a custom domain, ad-free experience, and the ability to sell subscriptions, take payments, and collect donations from day one. Backed with email support to help get everything just right.'
@@ -1095,7 +1103,11 @@ const getPlanEcommerceDetails = (): IncompleteWPcomPlan => ( {
 			};
 		} );
 	},
-	get2023PlanComparisonConditionalFeatures: () => [ FEATURE_SHARES_SOCIAL_MEDIA_JP ],
+	get2023PlanComparisonConditionalFeatures: () => [
+		FEATURE_SHARES_SOCIAL_MEDIA_JP,
+		FEATURE_COMMISSION_FEE_STANDARD_FEATURES,
+		FEATURE_COMMISSION_FEE_WOO_FEATURES,
+	],
 	getHostingSignupFeatures: ( term ) => () =>
 		compact( [
 			term !== TERM_MONTHLY && FEATURE_CUSTOM_DOMAIN,
@@ -1492,7 +1504,10 @@ const getPlanPremiumDetails = (): IncompleteWPcomPlan => ( {
 			},
 		];
 	},
-	get2023PlanComparisonConditionalFeatures: () => [ FEATURE_SHARES_SOCIAL_MEDIA_JP ],
+	get2023PlanComparisonConditionalFeatures: () => [
+		FEATURE_SHARES_SOCIAL_MEDIA_JP,
+		FEATURE_COMMISSION_FEE_STANDARD_FEATURES,
+	],
 	get2023PlanComparisonJetpackFeatureOverride: () => [ FEATURE_PAYPAL_JP, FEATURE_VIDEOPRESS_JP ],
 	// Features not displayed but used for checking plan abilities
 	getIncludedFeatures: () => [
@@ -1697,6 +1712,8 @@ const getPlanBusinessDetails = (): IncompleteWPcomPlan => ( {
 		FEATURE_SELL_60_COUNTRIES,
 		FEATURE_SHIPPING_INTEGRATIONS,
 		FEATURE_SHARES_SOCIAL_MEDIA_JP,
+		FEATURE_COMMISSION_FEE_STANDARD_FEATURES,
+		FEATURE_COMMISSION_FEE_WOO_FEATURES,
 	],
 	get2023PricingGridSignupStorageOptions: ( showLegacyStorageFeature ) => {
 		let storageOptionSlugs = [];
