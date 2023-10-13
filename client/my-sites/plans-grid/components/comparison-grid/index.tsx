@@ -1008,7 +1008,9 @@ const ComparisonGrid = ( {
 	const visibleGridPlans = useMemo(
 		() =>
 			visiblePlans.reduce( ( acc, planSlug ) => {
-				const gridPlan = displayedGridPlans.find( ( gridPlan ) => gridPlan.planSlug === planSlug );
+				const gridPlan = displayedGridPlans.find(
+					( gridPlan ) => getPlanClass( gridPlan.planSlug ) === getPlanClass( planSlug )
+				);
 
 				if ( gridPlan ) {
 					acc.push( gridPlan );
