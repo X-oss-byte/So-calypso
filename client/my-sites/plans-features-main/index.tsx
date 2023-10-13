@@ -320,9 +320,12 @@ const PlansFeaturesMain = ( {
 			const planPath = cartItemForPlan?.product_slug
 				? getPlanPath( cartItemForPlan.product_slug )
 				: '';
+			const checkoutUrl = cartItemForStorageAddOn
+				? `/checkout/${ siteSlug }/${ planPath },${ cartItemForStorageAddOn.product_slug }:-q-${ cartItemForStorageAddOn.quantity }`
+				: `/checkout/${ siteSlug }/${ planPath }`;
 			const checkoutUrlWithArgs = addQueryArgs(
 				{ ...( withDiscount && { coupon: withDiscount } ) },
-				`/checkout/${ siteSlug }/${ planPath }`
+				checkoutUrl
 			);
 
 			// `cartItemForPlan` is empty if Free plan is selected. Show `FreePlanPaidDomainDialog`
@@ -351,7 +354,6 @@ const PlansFeaturesMain = ( {
 				onUpgradeClick( cartItems );
 				return;
 			}
-
 			page( checkoutUrlWithArgs );
 		},
 		[
