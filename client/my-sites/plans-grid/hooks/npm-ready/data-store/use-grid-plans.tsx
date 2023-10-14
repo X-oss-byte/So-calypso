@@ -92,7 +92,7 @@ export type GridPlan = {
 		storageOptions: StorageOption[];
 		conditionalFeatures?: FeatureObject[];
 	};
-	tagline: string;
+	tagline: TranslateResult;
 	availableForPurchase: boolean;
 	productNameShort?: string | null;
 	planTitle: TranslateResult;
@@ -329,7 +329,7 @@ const useGridPlans = ( {
 		const isMonthlyPlan = isMonthly( planSlug );
 		const availableForPurchase = !! ( isInSignup || planUpgradeability?.[ planSlug ] );
 
-		let tagline = '';
+		let tagline: TranslateResult = '';
 		if ( 'plans-newsletter' === intent ) {
 			tagline = planConstantObj.getNewsletterTagLine?.() ?? '';
 		} else if ( 'plans-link-in-bio' === intent ) {
