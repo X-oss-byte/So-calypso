@@ -3288,25 +3288,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@electron/get@npm:^1.0.1":
-  version: 1.13.1
-  resolution: "@electron/get@npm:1.13.1"
+"@electron/get@npm:^2.0.0":
+  version: 2.0.3
+  resolution: "@electron/get@npm:2.0.3"
   dependencies:
     debug: ^4.1.1
     env-paths: ^2.2.0
     fs-extra: ^8.1.0
     global-agent: ^3.0.0
-    global-tunnel-ng: ^2.7.1
-    got: ^9.6.0
+    got: ^11.8.5
     progress: ^2.0.3
     semver: ^6.2.0
     sumchecker: ^3.0.1
   dependenciesMeta:
     global-agent:
       optional: true
-    global-tunnel-ng:
-      optional: true
-  checksum: f8a42983fef6c34656bd1d01cf8f72f407879e218b4ffc7bb76d1ed859ab980670af724ebe25f755427bf04b2ca7649c89e1f2be565e717d835e1b3e1e75f8ed
+  checksum: 148957d531bac50c29541515f2483c3e5c9c6ba9f0269a5d536540d2b8d849188a89588f18901f3a84c2b4fd376d1e0c5ea2159eb2d17bda68558f57df19015e
   languageName: node
   linkType: hard
 
@@ -6915,10 +6912,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^16.11.19":
-  version: 16.11.19
-  resolution: "@types/node@npm:16.11.19"
-  checksum: fe2fd2f15b4683345a7a7546c89ea75283acfd70d17c91dd6a0c4b8d42ef587c5b6506b6022b1b0778a1d7758cb7d3532d1d2cd6d052a880e78a9a5d0d52db44
+"@types/node@npm:*, @types/node@npm:^16.11.19, @types/node@npm:^16.11.26":
+  version: 16.18.58
+  resolution: "@types/node@npm:16.18.58"
+  checksum: ec39c4245f47cd0784ca037108ee4df09aea90bc070f9281c952c5096126b6600e6eaa950d5be05fa3fe2c5099be9c06d8920c08284f9c7fc215ecf10f6e44e2
   languageName: node
   linkType: hard
 
@@ -6936,7 +6933,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.0.10, @types/node@npm:^14.6.2":
+"@types/node@npm:^14.0.10":
   version: 14.17.14
   resolution: "@types/node@npm:14.17.14"
   checksum: 52d8d863fb771dbd667176b3c7c4bf6a2d55e4b4196ee0df4f36383584f2466794ed30da2b030d993d0aeb6fac0a39a4d373105ade6169c320028dfa3718b617
@@ -9870,7 +9867,7 @@ __metadata:
     archiver: ^3.1.1
     copy-webpack-plugin: ^10.1.0
     cross-env: ^7.0.3
-    electron: 12.1.0
+    electron: 22.3.25
     electron-builder: ^22.11.7
     electron-fetch: ^1.7.4
     electron-notarize: ^0.1.1
@@ -12283,18 +12280,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cacheable-request@npm:^7.0.1":
-  version: 7.0.1
-  resolution: "cacheable-request@npm:7.0.1"
+"cacheable-request@npm:^7.0.1, cacheable-request@npm:^7.0.2":
+  version: 7.0.4
+  resolution: "cacheable-request@npm:7.0.4"
   dependencies:
     clone-response: ^1.0.2
     get-stream: ^5.1.0
     http-cache-semantics: ^4.0.0
     keyv: ^4.0.0
     lowercase-keys: ^2.0.0
-    normalize-url: ^4.1.0
+    normalize-url: ^6.0.1
     responselike: ^2.0.0
-  checksum: 79996bd3fcf2b61f3af4c909a5d71a116fb9fd900ed0038b8c13476a6b652d1cc8689d9fd73a98c3fb2bf3268bc08dd52e8ff5aaea29aa98f747a000bb2fa506
+  checksum: 0834a7d17ae71a177bc34eab06de112a43f9b5ad05ebe929bec983d890a7d9f2bc5f1aa8bb67ea2b65e07a3bc74bea35fa62dd36dbac52876afe36fdcf83da41
   languageName: node
   linkType: hard
 
@@ -13895,16 +13892,6 @@ __metadata:
   bin:
     concurrently: ./bin/concurrently.js
   checksum: 639066704d197a919929522abf4372fb8a31bccfa5a8174231c9306b27f430c9994ad5022b26c2deeddd2630ed9e7593f374bb14f0a77e11b10bc7d7a0ab2d4e
-  languageName: node
-  linkType: hard
-
-"config-chain@npm:^1.1.11":
-  version: 1.1.13
-  resolution: "config-chain@npm:1.1.13"
-  dependencies:
-    ini: ^1.3.4
-    proto-list: ~1.2.1
-  checksum: 39d1df18739d7088736cc75695e98d7087aea43646351b028dfabd5508d79cf6ef4c5bcd90471f52cd87ae470d1c5490c0a8c1a292fbe6ee9ff688061ea0963e
   languageName: node
   linkType: hard
 
@@ -16236,16 +16223,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron@npm:12.1.0":
-  version: 12.1.0
-  resolution: "electron@npm:12.1.0"
+"electron@npm:22.3.25":
+  version: 22.3.25
+  resolution: "electron@npm:22.3.25"
   dependencies:
-    "@electron/get": ^1.0.1
-    "@types/node": ^14.6.2
-    extract-zip: ^1.0.3
+    "@electron/get": ^2.0.0
+    "@types/node": ^16.11.26
+    extract-zip: ^2.0.1
   bin:
     electron: cli.js
-  checksum: d33b4603d7f9cdfa9755dc9b14d41a00f5775eda8e0d4b2e3d0530180f808d96a7225383ba5c96a8a6de6647908a169599e4ab6b2cd577fd97640a8a1a8b41eb
+  checksum: 9f4f70cc4c4f46e932789ff09d1391e2f71bd348f5827a5c0d78f11ecf2454bff8612e7811abaec7cbac55a5eea9107e13eb72b9a7ccc43e6d3222f334f7c94a
   languageName: node
   linkType: hard
 
@@ -16369,7 +16356,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"encodeurl@npm:^1.0.2, encodeurl@npm:~1.0.2":
+"encodeurl@npm:~1.0.2":
   version: 1.0.2
   resolution: "encodeurl@npm:1.0.2"
   checksum: f6c2387379a9e7c1156c1c3d4f9cb7bb11cf16dd4c1682e1f6746512564b053df5781029b6061296832b59fb22f459dbe250386d217c2f6e203601abb2ee0bec
@@ -17981,7 +17968,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"extract-zip@npm:^1.0.3, extract-zip@npm:^1.6.7":
+"extract-zip@npm:^1.6.7":
   version: 1.7.0
   resolution: "extract-zip@npm:1.7.0"
   dependencies:
@@ -19469,18 +19456,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"global-tunnel-ng@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "global-tunnel-ng@npm:2.7.1"
-  dependencies:
-    encodeurl: ^1.0.2
-    lodash: ^4.17.10
-    npm-conf: ^1.1.3
-    tunnel: ^0.0.6
-  checksum: 273205f6d6204bdb64ff1d7f1574f392feeb62b2f45263c780d0605510e9756bbdbb5063d45e28476d8cd7656ca7846721caa3421503c7c7803e5d0f3729c532
-  languageName: node
-  linkType: hard
-
 "global@npm:^4.4.0, global@npm:~4.4.0":
   version: 4.4.0
   resolution: "global@npm:4.4.0"
@@ -19676,22 +19651,22 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"got@npm:^11.7.0":
-  version: 11.8.2
-  resolution: "got@npm:11.8.2"
+"got@npm:^11.7.0, got@npm:^11.8.5":
+  version: 11.8.6
+  resolution: "got@npm:11.8.6"
   dependencies:
     "@sindresorhus/is": ^4.0.0
     "@szmarczak/http-timer": ^4.0.5
     "@types/cacheable-request": ^6.0.1
     "@types/responselike": ^1.0.0
     cacheable-lookup: ^5.0.3
-    cacheable-request: ^7.0.1
+    cacheable-request: ^7.0.2
     decompress-response: ^6.0.0
     http2-wrapper: ^1.0.0-beta.5.2
     lowercase-keys: ^2.0.0
     p-cancelable: ^2.0.0
     responselike: ^2.0.0
-  checksum: 12fc2f5ffeed74746b75764c304f9dcd679edb593a9d079e8235ca3a2a112ab500702a81f693573a389c198c678f9b0e827921a20cdb29c90dc8897a37432419
+  checksum: 754dd44877e5cf6183f1e989ff01c648d9a4719e357457bd4c78943911168881f1cfb7b2cb15d885e2105b3ad313adb8f017a67265dd7ade771afdb261ee8cb1
   languageName: node
   linkType: hard
 
@@ -27039,16 +27014,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"npm-conf@npm:^1.1.3":
-  version: 1.1.3
-  resolution: "npm-conf@npm:1.1.3"
-  dependencies:
-    config-chain: ^1.1.11
-    pify: ^3.0.0
-  checksum: 4a54540e1e5ade9afe4b3be2e651a1198172015f8c51293c7124c4dfae402f2b67549cdf1d0eb918f3ef66016ba63672520b4bb3afaef815f5e98b52a74f5848
-  languageName: node
-  linkType: hard
-
 "npm-merge-driver@npm:^2.3.5":
   version: 2.3.5
   resolution: "npm-merge-driver@npm:2.3.5"
@@ -29739,13 +29704,6 @@ fsevents@~2.1.2:
   dependencies:
     xtend: ^4.0.0
   checksum: d54b77c31dc13bb6819559080b2c67d37d94be7dc271f404f139a16a57aa96fcc0b3ad806d4a5baef9e031744853e4afe3df2e37275aacb1f78079bbb652c5af
-  languageName: node
-  linkType: hard
-
-"proto-list@npm:~1.2.1":
-  version: 1.2.4
-  resolution: "proto-list@npm:1.2.4"
-  checksum: b9179f99394ec8a68b8afc817690185f3b03933f7b46ce2e22c1930dc84b60d09f5ad222beab4e59e58c6c039c7f7fcf620397235ef441a356f31f9744010e12
   languageName: node
   linkType: hard
 
@@ -36239,13 +36197,6 @@ testarmada-magellan@11.0.10:
   version: 0.4.3
   resolution: "tunnel-agent@npm:0.4.3"
   checksum: 92cc6355df3e73af15ef3f40100decb894664288a43ea8b960f65533d943309440419d7b88d553dde528ffa9bb95232a537f0a5e1d33633ced740c160d6bc6a3
-  languageName: node
-  linkType: hard
-
-"tunnel@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "tunnel@npm:0.0.6"
-  checksum: e27e7e896f2426c1c747325b5f54efebc1a004647d853fad892b46d64e37591ccd0b97439470795e5262b5c0748d22beb4489a04a0a448029636670bfd801b75
   languageName: node
   linkType: hard
 
