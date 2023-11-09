@@ -6316,6 +6316,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@testim/chrome-version@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "@testim/chrome-version@npm:1.1.4"
+  checksum: b784ea29af42266625684c8a89593edeb6933ebcfe1bdc2d30ff305e2496928e9d5803d94704c95e45c90bba6e4cdc65ca43f13f8e4b3a268249b2f4d3f71f96
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.11.3":
   version: 8.11.3
   resolution: "@testing-library/dom@npm:8.11.3"
@@ -11059,6 +11066,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^1.6.0":
+  version: 1.6.1
+  resolution: "axios@npm:1.6.1"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: ca2c6f56659a7f19e4a99082f549fe151952f6fd8aa72ed148559ab2d6a32ce37cd5dc72ce6d4d3cd91f0c1e2617c7c95c20077e5e244a79f319a6c0ce41204f
+  languageName: node
+  linkType: hard
+
 "axobject-query@npm:^2.2.0":
   version: 2.2.0
   resolution: "axobject-query@npm:2.2.0"
@@ -13020,21 +13038,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromedriver@npm:^89.0.0":
-  version: 89.0.0
-  resolution: "chromedriver@npm:89.0.0"
+"chromedriver@npm:^119.0.1":
+  version: 119.0.1
+  resolution: "chromedriver@npm:119.0.1"
   dependencies:
-    "@testim/chrome-version": ^1.0.7
-    axios: ^0.21.1
-    del: ^6.0.0
+    "@testim/chrome-version": ^1.1.4
+    axios: ^1.6.0
+    compare-versions: ^6.1.0
     extract-zip: ^2.0.1
-    https-proxy-agent: ^5.0.0
-    mkdirp: ^1.0.4
+    https-proxy-agent: ^5.0.1
     proxy-from-env: ^1.1.0
-    tcp-port-used: ^1.0.1
+    tcp-port-used: ^1.0.2
   bin:
     chromedriver: bin/chromedriver
-  checksum: a35546caf47b9c9b946de6f54ae36221ecf96efecb9b07adbf19d96e79b456fb86a3f022ada11e0658fd2dd3d03be73e929dc9b917385b27012012423db97258
+  checksum: e08fee043ffd518a205a7722a60a6b68c33c74bb4d3b989614f2e8152de0216c3af29224abd77c46d07d8499b7cd2ef487dd064242aa41ce90eef5f4ec5cea77
   languageName: node
   linkType: hard
 
@@ -13704,6 +13721,13 @@ __metadata:
   version: 0.1.2
   resolution: "compare-version@npm:0.1.2"
   checksum: f38b853cf0d244c0af5f444409abde3d2198cd97312efa1dbc4ab41b520009327c2a63db59bbaf2d69288eff6167ef22be9788dc5476157d073ecdff1a8eeb2d
+  languageName: node
+  linkType: hard
+
+"compare-versions@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "compare-versions@npm:6.1.0"
+  checksum: 5378edc8a53ac98ed907da463e1d6c26f1ed2664006d6a0d54bbdf7f046a36c43e244740854fc0edfc1e09253b9a0b7c98d1282dfee9f6f1a87199599f611218
   languageName: node
   linkType: hard
 
@@ -15113,15 +15137,6 @@ __metadata:
     supports-color:
       optional: true
   checksum: 31873df69ff7036ce4f4158dcd6f71cd399b834ab1efbf23383f660822d28c7e29442fa83d34ccdd2f5201ff69eb494f0c7e8c01ecd314f0207bb631bb048ac0
-  languageName: node
-  linkType: hard
-
-"debug@npm:4.1.0":
-  version: 4.1.0
-  resolution: "debug@npm:4.1.0"
-  dependencies:
-    ms: ^2.1.1
-  checksum: 9e7e9cfaa202c080962447038e3d1423a8731f612f8bed72f8ac34ce4c2c2d24d612bf3341c26b6765c6d432eb5b20eec2879385b7e1f227950ccfcbae80ffe1
   languageName: node
   linkType: hard
 
@@ -18581,6 +18596,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"follow-redirects@npm:^1.15.0":
+  version: 1.15.3
+  resolution: "follow-redirects@npm:1.15.3"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: 915a2cf22e667bdf47b1a43cc6b7dce14d95039e9bbf9a24d0e739abfbdfa00077dd43c86d4a7a19efefcc7a99af144920a175eedc3888d268af5df67c272ee5
+  languageName: node
+  linkType: hard
+
 "font-family@npm:^0.2.0":
   version: 0.2.0
   resolution: "font-family@npm:0.2.0"
@@ -20617,6 +20642,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"https-proxy-agent@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "https-proxy-agent@npm:5.0.1"
+  dependencies:
+    agent-base: 6
+    debug: 4
+  checksum: 6dd639f03434003577c62b27cafdb864784ef19b2de430d8ae2a1d45e31c4fd60719e5637b44db1a88a046934307da7089e03d6089ec3ddacc1189d8de8897d1
+  languageName: node
+  linkType: hard
+
 "human-signals@npm:^1.1.1":
   version: 1.1.1
   resolution: "human-signals@npm:1.1.1"
@@ -21073,10 +21108,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"ip-regex@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "ip-regex@npm:2.1.0"
-  checksum: 3ce2d8307fa0373ca357eba7504e66e73b8121805fd9eba6a343aeb077c64c30659fa876b11ac7a75635b7529d2ce87723f208a5b9d51571513b5c68c0cc1541
+"ip-regex@npm:^4.1.0":
+  version: 4.3.0
+  resolution: "ip-regex@npm:4.3.0"
+  checksum: f9ef1f5d0df05b9133a882974e572ae525ccd205260cb103dae337f1fc7451ed783391acc6ad688e56dd2598f769e8e72ecbb650ec34763396af822a91768562
   languageName: node
   linkType: hard
 
@@ -21842,7 +21877,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"is-url@npm:^1.2.2":
+"is-url@npm:^1.2.4":
   version: 1.2.4
   resolution: "is-url@npm:1.2.4"
   checksum: 0157a79874f8f95fdd63540e3f38c8583c2ef572661cd0693cda80ae3e42dfe8e9a4a972ec1b827f861d9a9acf75b37f7d58a37f94a8a053259642912c252bc3
@@ -21932,14 +21967,14 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"is2@npm:2.0.1":
-  version: 2.0.1
-  resolution: "is2@npm:2.0.1"
+"is2@npm:^2.0.6":
+  version: 2.0.9
+  resolution: "is2@npm:2.0.9"
   dependencies:
     deep-is: ^0.1.3
-    ip-regex: ^2.1.0
-    is-url: ^1.2.2
-  checksum: f8f11258890c1b0c38d1dff02742b06218518ca94ef389022b32b43442149b23d5b17d3d264c22e0cd18447196b48d26b74190deb59ae219fb6506d53fc7f2d3
+    ip-regex: ^4.1.0
+    is-url: ^1.2.4
+  checksum: 51090a2ad046651c1523e6aec98843c2be4b61fdafa5a68d89966b7d3b7116fdc68cfb218cfc3825eb20175fa741de2f89249546352dbc4ac1d86847fa4a084a
   languageName: node
   linkType: hard
 
@@ -35346,13 +35381,13 @@ swiper@4.5.1:
   languageName: node
   linkType: hard
 
-"tcp-port-used@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "tcp-port-used@npm:1.0.1"
+"tcp-port-used@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "tcp-port-used@npm:1.0.2"
   dependencies:
-    debug: 4.1.0
-    is2: 2.0.1
-  checksum: 52ea2247ae051ada609fc87360b14a2b24b0c8748a7a104f2941b1a7cf7fb039e76d8d8326155396e523f4c130fee2e80ab116a35fb94bdcc095e34f0f41196c
+    debug: 4.3.1
+    is2: ^2.0.6
+  checksum: a5fb29e35f1e452f1064e3671d02b6d65e7d9bffad98d8da688270b6ffdaa9a8351fe8321aedf131f3904af70b569d9c5f6d9fe75d57dda19c466abac2bc025a
   languageName: node
   linkType: hard
 
@@ -38324,7 +38359,7 @@ testarmada-magellan@11.0.10:
     asana-phrase: ^0.0.8
     babel-jest: ^27.2.4
     babel-plugin-dynamic-import-node: ^2.3.0
-    chromedriver: ^89.0.0
+    chromedriver: ^119.0.1
     config: ^1.28.0
     enzyme: ^3.11.0
     eslint: ^7.28.0
